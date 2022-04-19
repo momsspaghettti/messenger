@@ -1,0 +1,8 @@
+include:
+  - project: 'school/2021-09/backend/python/homeworks/7' # или 'school/2021-09/backend/java/homeworks/7' 
+    ref: master
+    file: '.gitlab-ci.yml'
+    
+variables:
+  APP_PORT: 8080 # порт, который слушает приложение при запуске
+  LANG: python # или java

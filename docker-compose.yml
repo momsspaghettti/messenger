@@ -1,0 +1,25 @@
+version: "2.4"
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=messenger
+      - POSTGRES_USER=messenger-api
+      - POSTGRES_PASSWORD=mk9I9Cm3mfOCMPXwVbubttOCOWc934
+    healthcheck:
+      test: "exit 0"
+  web:
+    image: "${CI_REGISTRY_IMAGE}"
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - POSTGRES_HOSTS=db
+      - POSTGRES_DB=messenger
+      - POSTGRES_USER=messenger-api
+      - POSTGRES_PASSWORD=mk9I9Cm3mfOCMPXwVbubttOCOWc934
+    links:
+      - db:db
+    depends_on:
+      db:
+        condition: service_healthy

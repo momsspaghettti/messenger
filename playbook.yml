@@ -1,0 +1,8 @@
+- hosts: "localhost"
+  tasks:
+    - name: start app
+      shell: "./env/bin/docker-compose up -d"
+    - name: wait for app
+      wait_for:
+        port: "{{ lookup('env', 'APP_PORT') }}"
+        delay: 2
